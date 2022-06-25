@@ -1,0 +1,365 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <title>SIMT-360</title>
+    <!--projectdescription-->
+    <meta name="description" content="Saic Tour Demo" />
+    <!--projectdescription-end-->
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <meta charset="utf-8" />
+    <meta name="viewport" content="initial-scale=1, maximum-scale=1, user-scalable=no, width=device-width, shrink-to-fit=no" />
+
+    <link rel="stylesheet" type="text/css" href="css/font-awesome.css" />
+    <link rel="stylesheet" type="text/css" href="style.css" />
+
+    <!-- Insert this line above script imports  -->
+    <script>
+        if (typeof module === "object") {
+            window.module = module;
+            module = undefined;
+        }
+    </script>
+
+    <script src="imagedata.js"></script>
+    <script src="jquery.js"></script>
+    <script src="three.min.js"></script>
+    <script src="panolens.min.js"></script>
+
+    <!-- Insert this line after script imports -->
+    <script>
+        if (window.module) module = window.module;
+    </script>
+
+    <style>
+        /* SCROLLBAR STYLING */
+        /* width */
+        
+         ::-webkit-scrollbar {
+            width: 0.25em;
+            height: 0.25em;
+        }
+        /* Track */
+        
+         ::-webkit-scrollbar-track {
+            background: #2c3643;
+        }
+        /* Handle */
+        
+         ::-webkit-scrollbar-thumb {
+            background: #0d9e59;
+            transition: background .5s;
+        }
+        /* Handle on hover */
+        
+         ::-webkit-scrollbar-thumb:hover {
+            background: #00e075;
+        }
+        
+        html,
+        body {
+            margin: 0;
+            width: 100%;
+            height: 100%;
+            overflow: hidden;
+            background-color: #000;
+            color;
+            black;
+        }
+        
+        a:link,
+        a:visited {
+            color: #bdc3c7;
+        }
+        
+        .fullwrapper {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background-color: black;
+        }
+        
+        #container {
+            width: 100%;
+            height: 100%;
+        }
+        
+        #tmp {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            padding: 3em;
+            background-color: rgba(0, 0, 0, .5);
+            backdrop-filter: blur(5px);
+            display: none;
+        }
+    </style>
+</head>
+
+<body id="body">
+    <div id="container" style="color: black"></div>
+
+    <!--customhtml-->
+    <div class="customhotspot" id="PANO_20220621_112342_0"></div>
+    <div class="customhotspot" id="PANO_20220621_135630_j"></div>
+    <div class="customhotspot" id="PANO_20220621_152450_3"></div>
+    <!--customhtml-end-->
+
+    <div id="tmp">
+        <div style="
+          width: 100%;
+          height: 100%;
+          overflow: hidden;
+          overflow-y: auto;
+          box-sizing: border-box;
+          position: relative;
+        " id="tmpcontent"></div>
+        <div class="mediaclosebutton" onclick="hideTemp()">
+            <i class="fa fa-times-circle"></i>
+        </div>
+    </div>
+
+    <div id="loading" class="fullwrapper" style="display: table; width: 100%; height: 100%">
+        <div style="
+          display: table-cell;
+          vertical-align: middle;
+          text-align: center;
+          color: white;
+          font-size: 30px;
+          padding: 50px;
+        ">
+            <!--loadingtext-->Welcome To SIMT
+            <!--loadingtext-end-->
+        </div>
+    </div>
+
+    <script>
+        var container = document.querySelector("#container");
+        /*panolens*/
+
+        var viewer = new PANOLENS.Viewer({
+            container: container,
+            controlBar: true,
+            output: "console",
+            autoHideInfospot: false,
+        });
+
+        /*panolens-end*/
+
+        viewer.addUpdateCallback(function() {});
+
+        /*panoramas*/
+
+        var PANO_20220621_112342_0 = new PANOLENS.ImagePanorama(
+            "panoramas/PANO_20220621_112342_0.jpg"
+        );
+        PANO_20220621_112342_0.addEventListener("progress", function(e) {
+            $("#loading").show();
+        });
+        PANO_20220621_112342_0.addEventListener("load", function(e) {
+            $("#loading").fadeOut();
+        });
+        PANO_20220621_112342_0.addEventListener("click", function(e) {});
+
+        var infospotPANO_20220621_112342_00 = new PANOLENS.Infospot(
+            512,
+            hotspotIcons[9].data,
+            true
+        );
+        infospotPANO_20220621_112342_00.position.set(4927.87, -737.77, 302.07);
+        PANO_20220621_112342_0.add(infospotPANO_20220621_112342_00);
+
+        infospotPANO_20220621_112342_00.addEventListener("click", function() {
+            ChangePanorama("PANO_20220621_135630_j");
+        });
+
+        viewer.add(PANO_20220621_112342_0);
+
+        var PANO_20220621_135630_j = new PANOLENS.ImagePanorama(
+            "panoramas/PANO_20220621_135630_j.jpg"
+        );
+        PANO_20220621_135630_j.addEventListener("progress", function(e) {
+            $("#loading").show();
+        });
+        PANO_20220621_135630_j.addEventListener("load", function(e) {
+            $("#loading").fadeOut();
+        });
+        PANO_20220621_135630_j.addEventListener("click", function(e) {});
+
+        var infospotPANO_20220621_135630_j0 = new PANOLENS.Infospot(
+            512,
+            hotspotIcons[9].data,
+            true
+        );
+        infospotPANO_20220621_135630_j0.position.set(-4813.31, -1194.66, -597.11);
+        PANO_20220621_135630_j.add(infospotPANO_20220621_135630_j0);
+
+        infospotPANO_20220621_135630_j0.addEventListener("click", function() {
+            ChangePanorama("PANO_20220621_152450_3");
+        });
+
+        var infospotPANO_20220621_135630_j1 = new PANOLENS.Infospot(
+            512,
+            hotspotIcons[9].data,
+            true
+        );
+        infospotPANO_20220621_135630_j1.position.set(-2171.57, -1018.29, -4375.84);
+        PANO_20220621_135630_j.add(infospotPANO_20220621_135630_j1);
+
+        infospotPANO_20220621_135630_j1.addEventListener("click", function() {
+            ChangePanorama("PANO_20220621_112342_0");
+        });
+
+        viewer.add(PANO_20220621_135630_j);
+
+        var PANO_20220621_152450_3 = new PANOLENS.ImagePanorama(
+            "panoramas/PANO_20220621_152450_3.jpg"
+        );
+        PANO_20220621_152450_3.addEventListener("progress", function(e) {
+            $("#loading").show();
+        });
+        PANO_20220621_152450_3.addEventListener("load", function(e) {
+            $("#loading").fadeOut();
+        });
+        PANO_20220621_152450_3.addEventListener("click", function(e) {});
+
+        var infospotPANO_20220621_152450_30 = new PANOLENS.Infospot(
+            512,
+            hotspotIcons[9].data,
+            true
+        );
+        infospotPANO_20220621_152450_30.position.set(145.46, -2868.69, -4084.4);
+        PANO_20220621_152450_3.add(infospotPANO_20220621_152450_30);
+
+        infospotPANO_20220621_152450_30.addEventListener("click", function() {
+            ChangePanorama("PANO_20220621_135630_j");
+        });
+
+        viewer.add(PANO_20220621_152450_3);
+
+        $(document).ready(function() {
+            ChangePanorama("PANO_20220621_112342_0 ");
+        });
+
+        /*panoramas-end*/
+
+        function hideTemp() {
+            $("#tmp").fadeOut();
+            setTimeout(function() {
+                $("#tmpcontent").html("");
+            }, 1000);
+        }
+
+        function showMedia(type, content) {
+            switch (type) {
+                case 1:
+                    //Image
+                    $("#tmpcontent").html(
+                        "<img src='" + content + "' style='width: 100%;'>"
+                    );
+                    $("#tmp").fadeIn();
+                    break;
+                case 2:
+                    //Video
+                    $("#tmpcontent").html(
+                        "<video id='webvideo' controls autoplay style='width: 100%; height: 100%;'><source src='" +
+                        content +
+                        "' type='video/mp4'> Your browser does not support the video tag. </video>"
+                    );
+                    $("#tmp").fadeIn();
+                    break;
+                case 3:
+                    //Audio
+                    $("#tmpcontent").html(
+                        "<audio controls style='width: 100%;'><source src='" +
+                        content +
+                        "' type='audio/ogg'>Your browser does not support the audio tag.</audio>"
+                    );
+                    $("#tmp").fadeIn();
+                    break;
+                case 4:
+                    //PDF
+                    $("#tmpcontent").html(
+                        "<iframe src='pdfjs/web/viewer.html?file=../../" +
+                        content +
+                        "' style='width: 100%; height: 99%;'></iframe>"
+                    );
+                    $("#tmp").fadeIn();
+                    break;
+            }
+        }
+
+        //Update Callback
+        viewer.addUpdateCallback(function() {
+            /*viewerupdatecallback*/
+            if (viewer.panorama == PANO_20220621_112342_0) {}
+
+            if (viewer.panorama == PANO_20220621_135630_j) {}
+
+            if (viewer.panorama == PANO_20220621_152450_3) {}
+            /*viewerupdatecallback-end*/
+        });
+
+        var hotspotsvisible = true;
+
+        function ShowMyInfospot(hs, elid) {
+            var thehs = toScreenPosition(hs);
+            if (thehs.z < 1) {
+                $("#" + elid).css({
+                    top: thehs.y - $("#" + elid).height() / 2 + "px",
+                    left: thehs.x - $("#" + elid).width() / 2 + "px",
+                });
+                if (hotspotsvisible) $("#" + elid).show();
+            } else {
+                $("#" + elid).hide();
+            }
+        }
+
+        function toScreenPosition(obj) {
+            var vector = new THREE.Vector3();
+            var widthHalf = 0.5 * innerWidth;
+            var heightHalf = 0.5 * innerHeight;
+
+            //obj.updateMatrixWorld();
+            vector.setFromMatrixPosition(obj.matrixWorld);
+
+            vector.project(viewer.camera);
+
+            vector.x = vector.x * widthHalf + widthHalf;
+            vector.y = -(vector.y * heightHalf) + heightHalf;
+
+            return {
+                x: vector.x,
+                y: vector.y,
+                z: vector.z,
+            };
+        }
+
+        var currentPanorama;
+
+        function ChangePanorama(panorama) {
+            currentPanorama = panorama;
+            HideInfospots();
+            //$("#loading").fadeIn();
+            //$(".customhotspot").fadeOut();
+            setTimeout(function() {
+                viewer.setPanorama(window[panorama]);
+            }, 500);
+            setTimeout(function() {
+                $("#" + panorama).fadeIn();
+            }, 1500);
+        }
+
+        function HideInfospots() {
+            $(".customhotspot").fadeOut();
+        } /*customjs-end*/
+
+        /*customjs*/
+    </script>
+</body>
+
+</html>
